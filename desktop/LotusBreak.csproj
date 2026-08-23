@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <AssemblyName>LotusBreak</AssemblyName>
+    <RootNamespace>LotusBreak</RootNamespace>
+    <Version>1.0.0</Version>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3485.44" />
+    <PackageReference Include="OpenCvSharp4" Version="4.10.0.20241108" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.10.0.20241108" />
+    <None Remove="**\*.xml" />
+    <None Include="haarcascade_frontalface_default.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Include="headtrack.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Include="models\yolov8n-face.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <Target Name="CopyPlayableToGameRoot" AfterTargets="Build">
+    <PropertyGroup>
+      <GameRoot>$(MSBuildProjectDirectory)\..</GameRoot>
+    </PropertyGroup>
+    <ItemGroup>
+      <PlayFiles Include="$(TargetDir)LotusBreak.exe" />
+      <PlayFiles Include="$(TargetDir)LotusBreak.dll" />
+      <PlayFiles Include="$(TargetDir)LotusBreak.deps.json" />
+      <PlayFiles Include="$(TargetDir)LotusBreak.runtimeconfig.json" />
+      <PlayFiles Include="$(TargetDir)OpenCvSharp.dll" />
+      <PlayFiles Include="$(TargetDir)haarcascade_frontalface_default.xml" />
+      <PlayFiles Include="$(TargetDir)Microsoft.Web.WebView2.Core.dll" />
+      <PlayFiles Include="$(TargetDir)Microsoft.Web.WebView2.WinForms.dll" />
+      <PlayFiles Include="$(TargetDir)runtimes\win-x64\native\WebView2Loader.dll" />
+      <PlayFiles Include="$(MSBuildProjectDirectory)\headtrack.py" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PlayFiles)" DestinationFolder="$(GameRoot)" SkipUnchangedFiles="false" ContinueOnError="true" />
+    <MakeDir Directories="$(GameRoot)\models" Condition="Exists('$(MSBuildProjectDirectory)\models\yolov8n-face.onnx')" />
+    <Copy
+      SourceFiles="$(MSBuildProjectDirectory)\models\yolov8n-face.onnx"
+      DestinationFolder="$(GameRoot)\models"
+      SkipUnchangedFiles="false"
+      ContinueOnError="true" />
+    <MakeDir Directories="$(GameRoot)\runtimes\win-x64\native" Condition="Exists('$(TargetDir)runtimes\win-x64\native\WebView2Loader.dll')" />
+    <Copy
+      SourceFiles="$(TargetDir)runtimes\win-x64\native\WebView2Loader.dll"
+      DestinationFolder="$(GameRoot)\runtimes\win-x64\native"
+      SkipUnchangedFiles="false"
+      ContinueOnError="true" />
+  </Target>
+</Project>

@@ -1,0 +1,40 @@
+# .NET build output
+desktop/bin/
+desktop/obj/
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+
+# Root copies produced by the desktop build
+/LotusBreak.exe
+/LotusBreak.dll
+/LotusBreak.pdb
+/LotusBreak.deps.json
+/LotusBreak.runtimeconfig.json
+/OpenCvSharp.dll
+/OpenCvSharpExtern.dll
+/opencv_videoio_ffmpeg4100_64.dll
+/Microsoft.Web.WebView2.Core.dll
+/Microsoft.Web.WebView2.WinForms.dll
+/Microsoft.Web.WebView2.Wpf.dll
+/WebView2Loader.dll
+/runtimes/
+/models/
+/haarcascade_frontalface_default.xml
+/headtrack.py
+/icon.ico
+/icon.png
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+.idea/
