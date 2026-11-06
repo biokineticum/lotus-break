@@ -1,44 +1,50 @@
 # Lotus Break
 
-A stained-glass **Breakout** that uses the same **head-camera** controls as Bodhisattva. Lean to move the golden barge. Raise your head to launch the pearl. Keyboard still works.
+**Stained-glass Breakout with head-camera controls** — lean to move the paddle, raise your head to launch. Keyboard still works.
 
-## How to run
+Built for short **neck mobility breaks** at a desk. Aimed at office workers, physios recommending micro-breaks, and anyone exploring camera-based rehab games.
 
-1. Extract / open the `lotus-break` folder (not from inside a ZIP).
-2. Click `play.bat`.
+## Features
 
-`play.bat`:
+- Breakout-style levels with stained-glass bricks and power-ups (triple ball, wide paddle, fire ball, extra life)
+- **Head tracking** via desktop app (YOLOv8-Face ONNX in `desktop/models/`)
+- Browser fallback (keyboard only) when .NET is missing
+- Windows launcher: `play.bat`
 
-- launches the desktop app with the camera if `LotusBreak.exe` is already built
-- on first run from source **builds the game** (needs [.NET 10 SDK](https://dotnet.microsoft.com/download) and internet)
-- if `.NET` is missing, opens the browser version (keyboard works; camera does not)
+## Requirements
 
-Leave the `play.bat` window open during the first build. After that the game should start on its own.
+- Webcam + [WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/) for camera mode
+- [.NET SDK](https://dotnet.microsoft.com/download) to build the desktop app from source
+- Python with `onnxruntime`, `opencv-python`, `numpy` for the head tracker
 
-Camera needs the desktop app, a webcam, Python with `onnxruntime`, `opencv-python` and `numpy`, and the [WebView2 Runtime](https://developer.microsoft.com/microsoft-edge/webview2/). Head tracking is **YOLOv8-Face** (5 landmarks: eyes, nose, mouth corners). The weights live in `desktop/models/yolov8n-face.onnx`.
+## Quick start
+
+1. Clone or extract the repo (not from inside a ZIP).
+2. Double-click **`play.bat`**.
+
+`play.bat` runs `LotusBreak.exe` if built; otherwise builds from source (needs .NET + internet). Without .NET it opens the browser version.
+
+Leave the `play.bat` window open during the first build.
 
 ## Controls
 
 | Action | Keyboard | Camera |
 | --- | --- | --- |
 | Start / camera check | `Enter` | — |
-| Move paddle | Left / Right arrows | Lean left / right |
-| Launch ball | `Space` | Raise your head |
+| Move paddle | ← / → | Lean left / right |
+| Launch ball | `Space` | Raise head |
 | Pause | `Esc` | — |
 | Recalibrate | `C` | — |
 | Camera settings | `F1` / `W` | — |
-| Resolution | `F` | — |
-| Mute | `M` | — |
 
 ## Relics
 
-Bricks sometimes drop a relic:
+Bricks may drop: **Triple pearl**, **Wide barge**, **Fire pearl**, **Lotus life** (max 5). Gold glass takes two hits; obsidian three.
 
-- **Triple pearl** — two extra balls
-- **Wide barge** — longer paddle
-- **Fire pearl** — the ball burns through glass
-- **Lotus life** — extra life (max 5)
+---
 
-Gold glass takes two hits. Obsidian takes three.
+## Author
 
-Eight windows. Keep the pearl aloft.
+**Dariusz Mosler** (Biokineticum) — physiotherapy, biomechanics, sports science  
+🌐 [biokineticum.com](https://biokineticum.com) · 📰 [Substack](https://biokineticum.substack.com) · 𝕏 [@Biokineticum](https://x.com/Biokineticum)
+
